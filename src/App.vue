@@ -1,62 +1,77 @@
 <template>
   <div>
-    <h2>Message: {{ message }}</h2>
-    <h2>Number: {{ number }}</h2>
+    <h1>{{ message }}</h1>
+    <button v-on:click="replaceText('v-on fun!')">Replace Text</button>
+    <button @click="replaceText('v-on fun!')">Replace Text</button>
 
-    <button @click="changeMessageUpperCase">Change message to upper Case</button>
-    <button @click="IncreamentNum">Increament Number</button>
+    <hr>
+    <p>only numbers from user input</p>
+    <input type="text" @keydown="handleInput($event)">
 
 
     <hr>
-    <h2>Name: {{ player.name }}</h2>
-    <h2>Hobbies: {{ player.hobbies }}</h2>
 
-    <button @click="changeMessageUpperCase">Change to UpperCase</button>
-    <button @click="changePlayer">Change Player</button>
+    <div style="width: 100px; height: 100px; background-color: aqua;" @contextmenu.prevent></div>
+
+    <hr>
+
+    <div id="mouseover" @mouseover="fun1">
+      <textarea name="" id="" @mouseover.stop="fun2($event)">This is a text area</textarea>
+    </div>
+    <hr>
+
+    <div>
+      <input type="text" @keydown.enter="console.log('You pressed Enter')">
+    </div>
+    <hr>
+
+    <div>
+      <input type="text" @keydown.down="console.log('You pressed Enter')">
+    </div>
+    <hr>
+    <div>
+      <input type="text" @keydown.space="console.log('You pressed Enter')">
+    </div>
+
+
+
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-let message = ref("Hello, Reactors")
-let number = ref(10)
+import { ref } from 'vue'
 
-function changeMessageUpperCase() {
-  player.value.name = player.value.name.toUpperCase();
+function fun1() {
+  console.log('mouseover div');
 }
 
-function changeHobbies() {
-  player.value.core.engine = "V8"
-}
+function fun2(event) {
+  // event.stopPropagation();
 
-function changePlayer() {
-  player.value = {
-    "name": "Morgan",
-    "age": 22,
-    "position": "Forward",
-    "stats": {
-      "goals": 15,
-      "assists": 7,
-      "matches": 20
-    }
+  console.log("mouse over event");
+}
+// 
+function handleInput(event) {
+  let keycode = event.keyCode;
+
+  console.log(keycode);
+  if (keycode < 48 || keycode > 57) {
+    event.preventDefault();
   }
-
 }
-
-function IncreamentNum() {
-  number.value += 10;
-  console.log(number.value);
+// 
+let message = ref("Hello, On!")
+function replaceText(msg) {
+  message.value = msg;
 }
-
-let player = ref({
-  age: 45,
-  name: "John D",
-  hobbies: ["chess", "programming", "reading"],
-  core: {
-    engine: "V6",
-    sEngine: "V7"
-  }
-})
 </script>
 
-<style scoped></style>
+<style scoped>
+#mouseover {
+  margin: 100px;
+  text-align: right;
+  background-color: purple;
+  width: 300px;
+  height: 300px;
+}
+</style>
