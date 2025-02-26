@@ -1,61 +1,62 @@
 <template>
   <div>
-    <h1>{{ message }}</h1>
-    <hr>
-    <img :src="imageUrls" alt="">
-    <hr>
-    <img v-bind:src="imageUrls" alt="">
-    <button @click="changeImg">Change Image</button>
-    <hr>
-    <input type="text" :value="defaultInput">
+    <h2>Message: {{ message }}</h2>
+    <h2>Number: {{ number }}</h2>
+
+    <button @click="changeMessageUpperCase">Change message to upper Case</button>
+    <button @click="IncreamentNum">Increament Number</button>
+
 
     <hr>
+    <h2>Name: {{ player.name }}</h2>
+    <h2>Hobbies: {{ player.hobbies }}</h2>
 
-    <p :class="className">Harry Potter</p>
-    <p :class="{inactive: isInActive, center: isCenter }">Placide Ndai</p>
-    <p :class="['active', 'center']">John</p>
+    <button @click="changeMessageUpperCase">Change to UpperCase</button>
+    <button @click="changePlayer">Change Player</button>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
+let message = ref("Hello, Reactors")
+let number = ref(10)
 
-let message = "Hello, Friends"
-let imageUrls = ref("/public/img/banner_1.jpg")
-
-function changeImg() {
-  imageUrls.value = "/public/img/banner_2.jpg";
+function changeMessageUpperCase() {
+  player.value.name = player.value.name.toUpperCase();
 }
 
+function changeHobbies() {
+  player.value.core.engine = "V8"
+}
 
-let defaultInput = "write something"
+function changePlayer() {
+  player.value = {
+    "name": "Morgan",
+    "age": 22,
+    "position": "Forward",
+    "stats": {
+      "goals": 15,
+      "assists": 7,
+      "matches": 20
+    }
+  }
 
-// classes 
-let className = 'active'
+}
 
-let isInActive = ref(true)
-let isCenter = ref(false)
+function IncreamentNum() {
+  number.value += 10;
+  console.log(number.value);
+}
 
-
+let player = ref({
+  age: 45,
+  name: "John D",
+  hobbies: ["chess", "programming", "reading"],
+  core: {
+    engine: "V6",
+    sEngine: "V7"
+  }
+})
 </script>
 
-
-
-<style scoped>
-img {
-  max-width: 300px;
-}
-
-.active {
-  color: green;
-}
-
-.inactive {
-  color: red;
-  text-decoration: line-through;
-}
-
-.center{
-  text-align: center;
-}
-</style>
+<style scoped></style>
