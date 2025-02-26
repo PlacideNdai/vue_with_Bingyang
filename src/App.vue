@@ -2,51 +2,60 @@
   <div>
     <h1>{{ message }}</h1>
     <hr>
-    <h1> Number: {{ number }}</h1>
+    <img :src="imageUrls" alt="">
+    <hr>
+    <img v-bind:src="imageUrls" alt="">
+    <button @click="changeImg">Change Image</button>
+    <hr>
+    <input type="text" :value="defaultInput">
+
+    <hr>
+
+    <p :class="className">Harry Potter</p>
+    <p :class="{inactive: isInActive, center: isCenter }">Placide Ndai</p>
+    <p :class="['active', 'center']">John</p>
   </div>
-  <hr>
-
-  <h1>Double Number 50: {{ doubleNum(120) }}</h1>
-  <hr>
-  <h1>Number * 2 = {{ number * 2 }}</h1>
-  <hr>
-
-  <h1>{{ number > 500 ? "Number greater than 500" : "Number is less than 500" }}</h1>
-
-  <hr>
-  <h2>{{ person }}</h2>
-
-  <hr>
-  <p v-text="number"></p>
-  <hr>
-  <h1 v-html="personGreet"></h1>
-
-
 </template>
 
 <script setup>
-// script
+import { ref } from 'vue'
 
-let message = "Hello, Friends!"
-let number = 510 / 2
+let message = "Hello, Friends"
+let imageUrls = ref("/public/img/banner_1.jpg")
 
-function doubleNum(num) {
-  return num * 2;
+function changeImg() {
+  imageUrls.value = "/public/img/banner_2.jpg";
 }
 
 
-const person = {
-  name: "John Doe",
-  age: 30,
-  contactDetails: {
-    email: "john.doe@example.com",
-    phone: "123-456-7890"
-  }
-};
+let defaultInput = "write something"
 
-let personGreet = "<h1>Sports<h1/>"
+// classes 
+let className = 'active'
+
+let isInActive = ref(true)
+let isCenter = ref(false)
+
+
 </script>
 
 
 
-<style scoped></style>
+<style scoped>
+img {
+  max-width: 300px;
+}
+
+.active {
+  color: green;
+}
+
+.inactive {
+  color: red;
+  text-decoration: line-through;
+}
+
+.center{
+  text-align: center;
+}
+</style>
