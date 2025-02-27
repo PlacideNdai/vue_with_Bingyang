@@ -1,77 +1,88 @@
 <template>
   <div>
     <h1>{{ message }}</h1>
-    <button v-on:click="replaceText('v-on fun!')">Replace Text</button>
-    <button @click="replaceText('v-on fun!')">Replace Text</button>
+    <h1>Welcome, {{ formData.name }}</h1>
+    <form action="">
+      <table>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td><input type="text" v-model="formData.name"></td>
+          </tr>
+          <tr>
+            <td>Gender</td>
+            <td>
+              <input type="radio" name="gender" value="female" v-model="formData.gender"> Female
+              <input type="radio" name="gender" value="male" v-model="formData.gender"> Male
+            </td>
+          </tr>
 
-    <hr>
-    <p>only numbers from user input</p>
-    <input type="text" @keydown="handleInput($event)">
-
-
-    <hr>
-
-    <div style="width: 100px; height: 100px; background-color: aqua;" @contextmenu.prevent></div>
-
-    <hr>
-
-    <div id="mouseover" @mouseover="fun1">
-      <textarea name="" id="" @mouseover.stop="fun2($event)">This is a text area</textarea>
-    </div>
-    <hr>
-
-    <div>
-      <input type="text" @keydown.enter="console.log('You pressed Enter')">
-    </div>
-    <hr>
-
-    <div>
-      <input type="text" @keydown.down="console.log('You pressed Enter')">
-    </div>
-    <hr>
-    <div>
-      <input type="text" @keydown.space="console.log('You pressed Enter')">
-    </div>
-
-
-
+          <tr>
+            <td>Age</td>
+            <td><input type="number" v-model.number="formData.age"></td>
+          </tr>
+          <tr>
+            <td>Hobbies</td>
+            <td>
+              <input type="checkbox" name="hobbies" value="basketball" v-model="formData.hobbies"> Basketball
+              <input type="checkbox" name="hobbies" value="football" v-model="formData.hobbies"> Football
+              <input type="checkbox" name="hobbies" value="javascript" v-model="formData.hobbies"> JavaScript
+            </td>
+          </tr>
+          <tr>
+            <td>Profession</td>
+            <td>
+              <select name="profession" id="" v-model="formData.profession">
+                <option value="">Select one</option>
+                <option value="player">gamer</option>
+                <option value="school">profesor</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Description</td>
+            <td>
+              <textarea name="description" id="" @keydown.enter="submitForm" v-model="formData.desc"></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="submit" @click="submitForm" >Submit</button>
+      <button type="reset" @click="resetForm">Reset</button>
+    </form>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-function fun1() {
-  console.log('mouseover div');
+let formData = ref({
+  name: '',
+  gender: '',
+  age: '',
+  hobbies: [],
+  profession: '',
+  desc: ''
+})
+
+
+function submitForm() {
+  console.log(JSON.stringify(formData.value));
 }
 
-function fun2(event) {
-  // event.stopPropagation();
-
-  console.log("mouse over event");
-}
-// 
-function handleInput(event) {
-  let keycode = event.keyCode;
-
-  console.log(keycode);
-  if (keycode < 48 || keycode > 57) {
-    event.preventDefault();
+// submitting
+function resetForm() {
+  formData.value = {
+    name: '',
+    gender: '',
+    age: '',
+    hobbies: [],
+    profession: '',
+    desc: ''
   }
 }
-// 
-let message = ref("Hello, On!")
-function replaceText(msg) {
-  message.value = msg;
-}
+
+const message = ref('Hello, Vue!');
 </script>
 
-<style scoped>
-#mouseover {
-  margin: 100px;
-  text-align: right;
-  background-color: purple;
-  width: 300px;
-  height: 300px;
-}
-</style>
+<style scoped></style>
