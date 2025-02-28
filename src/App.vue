@@ -1,92 +1,56 @@
 <template>
   <div>
-    <h1>{{ message }}</h1>
-    <button @click="sortbyAge">Sort user by age</button>
-    <ul>
-      <li v-for="user in users" :key="user.id">
-        {{ user.id }} - {{ user.name }} - {{ user.age }} - {{ user.isActive }}
-      </li>
-    </ul>
-
-
-    <hr>
-
-
-    <table border="1">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Active Status</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr v-for="(user, index) in users" :key="user.id">
-          <td>{{ index }}</td>
-          <td :class="{ inactive: !user.isActive }">{{ user.name }}</td>
-          <td>{{ user.age }}</td>
-          <td> <button @click="user.isActive = !user.isActive">{{ user.isActive ? "Deactivate" : "Restore" }}</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <hr>
-
-    <div v-for="(value, key) in users[0]">{{key}} - {{ value }}</div>
+    
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue"
-let message = "Hello, Again!"
-
-function sortbyAge() {
-  users.value.sort((a, b) => a.age - b.age)
-}
+import { ref } from 'vue';
 
 
 
-const users = ref([
+  const users = ref([
   {
-    id: 1,
-    name: "John Doe",
-    age: 30,
-    isActive: true
+    "id": 1,
+    "name": "John Doe",
+    "age": 30,
+    "active": true
   },
   {
-    id: 2,
-    name: "Jane Smith",
-    age: 25,
-    isActive: false
+    "id": 2,
+    "name": "Jane Smith",
+    "age": 25,
+    "active": false
   },
   {
-    id: 3,
-    name: "Alice Johnson",
-    age: 28,
-    isActive: true
+    "id": 3,
+    "name": "Emily Johnson",
+    "age": 28,
+    "active": true
   },
   {
-    id: 4,
-    name: "Bob Brown",
-    age: 35,
-    isActive: false
+    "id": 4,
+    "name": "Michael Brown",
+    "age": 35,
+    "active": false
   },
   {
-    id: 5,
-    name: "Charlie Green",
-    age: 22,
-    isActive: true
+    "id": 5,
+    "name": "Linda Davis",
+    "age": 40,
+    "active": true
   }
-]);
+]
+)
 
+  function sortuserByAge(){
+    users.value.sort((a,b)=> a.age - b.age)
+  }
 </script>
 
 <style scoped>
-.inactive {
-  color: red;
-  text-decoration: line-through;
+.inactive{
+  color:red; 
+  text-decoration:line-through; 
 }
 </style>
