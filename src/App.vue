@@ -1,23 +1,61 @@
 <template>
-  <ButtonCounter></ButtonCounter>
-  <ButtonCounter></ButtonCounter>
+  <!-- <BlogPost
+      id="1" 
+      blogPostTitle="What is a muggle" 
+      blogPostContent="A muggle is a person who lacks any sort of magical ability..."
+   ></BlogPost>
 
-  <button-counter></button-counter>
+  <BlogPost 
+    :id="blogPostId" 
+    :blog-post-title="blogPostTitle"
+    :blog-post-content="blogPOSTContent">
+  </BlogPost> -->
 
   <hr>
 
-  <div style="background: orange; padding: 5px;">
-    This is the root component
-  <CompA></CompA>
-  <CompA></CompA>
-</div>
+  <BlogPost v-for="post in posts" :id="post.id" :key="post.id" :blog-post-title="post.blogPostTitle" :blog-post-content="post.blogPostContent">
+  </BlogPost>
+
+  <hr>
+  second 
+  <BlogPost 
+    v-for="post in posts" :key="post.id" v-bind="post" 
+  >
+  
+  </BlogPost>
 </template>
 
 <script setup>
-  import ButtonCounter from './assets/ButtonCounter.vue';
-import CompA from './assets/CompA.vue';
+  import { ref } from 'vue';
+import BlogPost from './assets/BlogPost.vue';
+
+
+let posts = ref([
+
+{
+      "blogPostId": 1,
+      "blogPostTitle": "First Post",
+      "blogPostContent": "This is the content of the first post."
+    },
+    {
+      "blogPostId": 2,
+      "blogPostTitle": "Second Post",
+      "blogPostContent": "Here's the content of the second post."
+    },
+    {
+      "blogPostId": 3,
+      "blogPostTitle": "Third Post",
+      "blogPostContent": "And this is the content of the third post."
+    }
+])
+
+  let blogPostId = ref(1);
+  let blogPostTitle = ref("Something about news");
+  let blogPOSTContent = ref("Something in the news explained here");
+
+// another things
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>
