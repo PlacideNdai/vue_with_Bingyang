@@ -1,71 +1,23 @@
 <template>
-  <h1>{{ message }}</h1>
-  <div class="card">
-    <h2 ref="title">This is the app componetnt.</h2>
-    <h2 >Number: {{ number }}</h2>
-    <button @click="number++">Increase the number</button>
+  <ButtonCounter></ButtonCounter>
+  <ButtonCounter></ButtonCounter>
 
-    <button @click="isShow = !isShow">Toggle component1</button>
-    <Component1 v-if="isShow"></Component1>
-  </div>
+  <button-counter></button-counter>
+
+  <hr>
+
+  <div style="background: orange; padding: 5px;">
+    This is the root component
+  <CompA></CompA>
+  <CompA></CompA>
+</div>
 </template>
 
 <script setup>
-import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated, ref } from 'vue';
-import Component1 from './Component1.vue';
-
-let message = "Hello, again!"
-let number = ref(1)
-let title = ref()
-let isShow = ref(true)
-
-console.log("App Component is setup");
-
-onBeforeMount(()=>{
-  console.log("Before App amount")
-  console.log(number.value)
-  console.log(title.value)
-})
-
-onMounted(()=>{
-  console.log("It's mounted");
-  console.log(number.value);
-  console.log(title.value)
-})
-
-onBeforeUpdate(()=>{
-  console.log("It's mounted");
-  console.log(number.value);
-  console.log(title.value)
-})
-
-
-onUpdated(()=>{
-  console.log("It's updating");
-  console.log(number.value);
-  console.log(title.value)
-})
-
-onBeforeUnmount(()=>{
-  console.log("It's before unmount");
-  console.log(number.value);
-  console.log(title.value)
-})
-
-onUnmounted(()=>{
-  console.log("It's unmounted");
-  console.log(number.value);
-  console.log(title.value)
-})
-
-
+  import ButtonCounter from './assets/ButtonCounter.vue';
+import CompA from './assets/CompA.vue';
 </script>
 
-<style scoped>
-  .card{
-    background-color: purple;
-    color: white;
-    padding: 20px 10px;
-    margin-bottom: 10px;
-  }
+<style lang="scss" scoped>
+
 </style>
