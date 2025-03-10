@@ -1,46 +1,28 @@
 <template>
-  <BlogPost 
-    v-for="post in posts" :key="post.id" :blogPostId="post.id" v-model:blogPostTitle="post.blogPostTitle" v-model:blogPostContent="post.blogPostContent" 
-    @delete-blog-post="processDeletion"
-  >
-  
-  </BlogPost>
+  <div>
+    <h1>{{ message }}</h1>
+    <div style="background: orange; padding-left: 10px;">
+      <CompA></CompA>
+    </div>
+  </div>
 </template>
 
 <script setup>
-  import { ref } from 'vue';
-import BlogPost from './assets/BlogPost.vue';
+  import { provide, readonly, ref } from 'vue';
+import CompA from './assets/CompA.vue';
 
-function processDeletion(id){
-  let index = posts.value.findIndex(item =>item.id == id)
-  posts.value.splice(index, 1);
-}
+  let message = ref("Hello, Friends - Provide/Inject");
 
-let posts = ref([
+  function updateMessage(){
+    message.value = "Hello provided update";
+  }
 
-{
-      "blogPostId": 1,
-      "blogPostTitle": "First Post",
-      "blogPostContent": "This is the content of the first post."
-    },
-    {
-      "blogPostId": 2,
-      "blogPostTitle": "Second Post",
-      "blogPostContent": "Here's the content of the second post."
-    },
-    {
-      "blogPostId": 3,
-      "blogPostTitle": "Third Post",
-      "blogPostContent": "And this is the content of the third post."
-    },
-    {
-      "blogPostId": 4,
-      "blogPostTitle": "Third Post",
-      "blogPostContent": "And this is the content of the third post."
-    }
-])
+  provide('msg', {message, updateMessage});
 
-// another things
+  let count = ref(0);
+
+  provide('read-only-count', readonly(count));
+
 </script>
 
 <style scoped>
