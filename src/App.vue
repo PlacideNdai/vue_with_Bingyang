@@ -1,9 +1,9 @@
 <template>
   <div>
     <StudentList :list="list">
-      <template #default="{stu}">
-        <span :class="{cursed: stu.name == 'John'}">
-          {{ stu.name  }}
+      <template #default="{ stu }">
+        <span :class="{ cursed: stu.name == 'John' }">
+          {{ stu.name }}
         </span>
       </template>
     </StudentList>
@@ -13,7 +13,7 @@
     <hr>
 
     <el-table :data="todoList" stripe border style="width: 100%">
-     <el-table-column prop="userId" label="User ID" width="180" />
+      <el-table-column prop="userId" label="User ID" width="180" />
       <el-table-column prop="id" label="ID" width="180" />
       <el-table-column prop="title" label="Title" />
       <el-table-column prop="completed" label="Status">
@@ -22,7 +22,7 @@
           <el-tag type="danger" v-else>Incomplete</el-tag>
         </template>
       </el-table-column>
-  </el-table>
+    </el-table>
   </div>
 </template>
 
@@ -31,23 +31,23 @@ import { onMounted, ref } from 'vue';
 import StudentList from './StudentList.vue';
 
 
-let todoList  = ref();
+let todoList = ref();
 
-async function getTodoList(){
+async function getTodoList() {
   const response = await fetch("https://jsonplaceholder.typicode.com/todos");
   const data = await response.json();
   console.log(data)
   todoList.value = data;
 }
 
-onMounted(()=>{
+onMounted(() => {
   getTodoList();
 })
 
 </script>
 
-<style  scoped>
-  .cursed{
-    color:red;
-  }
+<style scoped>
+.cursed {
+  color: red;
+}
 </style>
