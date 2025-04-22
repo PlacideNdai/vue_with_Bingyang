@@ -25,6 +25,10 @@ const router = createRouter({
                 {
                     path: '/blog', name: "BlogPosts", component: BlogPosts,
                     redirect: { name: 'blogPostsGreet' },
+                    meta:{
+                        enterAnimation: 'animate__animated animate__BounceInRight',
+                        leaveAnimation: 'animate__animated animate__BounceOutLeft'
+                    },
                     children: [
                         { path: '', name: 'blogPostsGreet', component: BlogPostsGreet , meta: { requiresAuth: false } },
                         {

@@ -4,7 +4,14 @@
             <BlogPostsList></BlogPostsList>
         </aside>
         <main class="blog-posts-content-with-sidebar">
-            <router-view class="blog-posts-content"></router-view>
+            <router-view class="blog-posts-content" v-slot="{ Component,route }">
+                <transition
+                enter-active-class="animate__animated animate__fadeIn"
+                leave-active-class="animate__animated animate__fadeOut"
+                mode="out-in">
+                    <component :is="Component" :key="route.path"></component>
+                </transition>
+            </router-view>
             <router-view name="sidebar"></router-view>
         </main>
     </div>
@@ -34,4 +41,5 @@ import BlogPostsList from '@/components/BlogPostList.vue';
             flex: 1;
         }
     }
+
 </style>

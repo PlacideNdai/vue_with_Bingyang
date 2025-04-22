@@ -1,3 +1,4 @@
+import 'animate.css';
 import 'element-plus/dist/index.css';
 import { createApp } from 'vue';
 import App from './App.vue';
