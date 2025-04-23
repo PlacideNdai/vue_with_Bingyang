@@ -13,6 +13,19 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
     history: createWebHistory(),
+    scrollBehavior(to, from, savedPosition) {
+
+        const schrollBehaviourOptions = {
+            top: 0,
+            behavior: 'smooth'
+        }
+
+        if(to.meta.scrollToElement){
+            schrollBehaviourOptions.el = to.meta.scrollToElement
+        }
+
+        return savedPosition ?? schrollBehaviourOptions
+    },
     routes: [
         {
             path: '/',
@@ -36,7 +49,7 @@ const router = createRouter({
                                 default: BlogPost,
                                 sidebar: Ads
                             },
-                            meta: { requiresAuth: false, title: 'Blog Post' }
+                            meta: { requiresAuth: false, title: 'Blog Post' , scrollToElement: '.blog-posts-layout'}
                         }
                     ]
                 },
